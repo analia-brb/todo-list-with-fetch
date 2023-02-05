@@ -20,23 +20,23 @@ const Home = () => {
 
     const clickBorrar = () => {
         setTodos([])
+        deleteTodos()
     }
 
     useEffect(()=> {
         createTodos()
+    }, [])
+
+    useEffect(()=> {
         getTodos()
         updateTodos()
         deleteTodos()
     }, [])
 
-    useEffect(()=> {
-        // createTodo()
-    }, [])
-
     // Fetch con POST
 
     function createTodos (){
-        fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+        fetch(`https://assets.breatheco.de/apis/fake/todos/user/annie`,
         {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -47,8 +47,10 @@ const Home = () => {
 
         }
 
+        // Fetch con GET
+
     function getTodos (){
-        fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+        fetch(`https://assets.breatheco.de/apis/fake/todos/user/annie`,
         {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
@@ -58,7 +60,7 @@ const Home = () => {
     }
 
     function updateTodos (){
-        fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+        fetch(`https://assets.breatheco.de/apis/fake/todos/user/annie`,
         {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -70,7 +72,7 @@ const Home = () => {
         }
 
         function deleteTodos (){
-            fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+            fetch(`https://assets.breatheco.de/apis/fake/todos/user/annie`,
             {
                 method: 'DELETE',
                 headers: {'Content-Type': 'application/json'},
