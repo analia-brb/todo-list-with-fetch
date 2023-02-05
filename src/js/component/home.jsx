@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const Home = () => {
     const [input, setInput] = useState("");
     const [todos, setTodos] = useState([]);
+    const [todosFromapi, setTodosFromapi] = useState([])
 
 
     function handleInput(e) {
@@ -21,13 +22,70 @@ const Home = () => {
         setTodos([])
     }
 
+    useEffect(()=> {
+        createTodos()
+        getTodos()
+        updateTodos()
+        deleteTodos()
+    }, [])
+
+    useEffect(()=> {
+        // createTodo()
+    }, [])
+
+    // Fetch con POST
+
+    function createTodos (){
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+        {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify([])
+        })
+            .then((response)=> response.json())
+            .then((data)=>console-log(todos))
+
+        }
+
+    function getTodos (){
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+        {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        })
+        .then((response)=> response.json())
+        .then((data)=>setTodosFromapi(data))
+    }
+
+    function updateTodos (){
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+        {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify([])
+        })
+            .then((response)=> response.json())
+            .then((data)=>console-log(todosFromapi))
+
+        }
+
+        function deleteTodos (){
+            fetch('https://assets.breatheco.de/apis/fake/todos/user/annie',
+            {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+            })
+            .then((response)=> response.json())
+            .then((data)=>console.log(data))
+        }
+
 
     return (
         <div className="container">
 
             <div className="padding-superior m-auto">
                 <h5 className="pb-3">
-                    A continuación ingrese su tarea a realizar</h5>
+                    Ingrese su tarea a realizar</h5>
                 <div className="input-group mb-3">
                     <button onClick={handleClick}
                         className="btn btn-success"
